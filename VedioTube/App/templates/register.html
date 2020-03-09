@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} VideoTube | Login {% endblock %}
+{% block css %}  {% endblock %}
+{% block body %} 
+
+<div class="container bg-dark text-white">
+<form class="form" role="form" autocomplete="off" id="loginForm" novalidate="" action="/register/" method="POST">{% csrf_token %}
+  <div class="form-group" id="form">
+	<h2><b>Create an Accout</b></h2>
+</div>
+  <div class="form-group">
+    <label for="formGroupExampleInput1">Name</label>
+    <input type="text" class="form-control" id="formGroupExampleInput1" placeholder="Name" name="name">
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Channel Name</label>
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Channel Name" name="channel">
+  </div>
+  <div class="form-group">
+    <label for="EmailOrphone">Email or Mobile Number</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email or Mobile Number" name="email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-warning" id="btn">Continue</button>
+	 <small id=".." class="form-text text-muted">By continuing, you agree to VideoTube's <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.<br><br>
+  </div>
+</form>
+</div>
+
+{% endblock %}
+{% block js %} {% endblock %}

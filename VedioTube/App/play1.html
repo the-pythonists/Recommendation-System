@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Video Player {% endblock %}
+
+{% block body %}
+
+<div class="container bg-secondary pt-3">
+	<div class="row">
+		<div class="col-8">
+		{% for i in video %}
+			<video class="video" width="700px" controls >
+				<source src="{{i.Video.url}}" type="video/mp4">
+			</video>
+
+		<div>
+			<b class="ml-2">{{i.Title}}</b>
+			<div class="bottom mt-1 ml-3 form-row">
+      <div class="col-0 mt-1">
+        <form action="/post_likes/{{i.Video_Id}}" method="get" name="">{% csrf_token %}
+          <button class="like btn-primary" name="like" type="submit">
+            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+          </button>
+          <span class="text-white">{{i.Likes}} Likes</span>
+        </form>
+        </div>
+      <div class="col-0 ml-2">
+          <a href="/post_dislikes/{{i.Video_Id}}"><button class="dislike btn-danger" name="dislike" type="submit">
+          <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+        </button></a>
+        <span class="text-white">{{i.Dislikes}} Dislikes</span>
+      </div>
+      <div class="col-0 ml-2">
+        <button class="share">
+          <i class="fa fa-share" aria-hidden="true"></i> Share
+        </button>
+      </div>
+      <div class="cols ml-5 mt-1">
+        <span class="fa fa-eye" aria-hidden="true"> <span class="text-white">{{ i.Views }} Views</span></span>
+      </div>
+    </div>
+    <div class="col">
+      <div class="mt-3 text-white">
+      <label for="example" class="">Comment
+      </label>
+      </div>
+      <div>
+      <form action="/post_comments/{{i.Video_Id}}" method="post" name="">{% csrf_token %}
+      <textarea rows="1" cols="93" name="comment" class="" placeholder="Add a public comment..."></textarea><br>
+      <button class="comment btn btn-dark" type="submit" name="commentbtn">Comment</button>
+      <br>
+      {% if i.Comments %}
+      <div class="mt-2"><img class="rounded-circle mr-2" src="{% static 'images/profile.jpeg' %}" style="width: 40px;"><b class="mr-3">Shubham Jain</b> <span>2 days ago </span><br></div>
+      <div class="ml-5"><span>{{i.Comments}}</span></div>
+      <div class="ml-5"><i class="fa fa-thumbs-o-up mr-5 " aria-hidden="true"></i><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></div>
+      {% else %}
+      <div></div>
+      {% endif %}
+      </form>
+      </div>
+  </div>
+		</div>
+		{% endfor %}
+		</div>
+
+		<div class="col-4">
+			<h2 class="mb-3 text-white mr-4">Recommended Videos</h2>
+			{% for j in all_videos %}
+			{% for jj in j %}
+			<div class="container">
+				<a href="/watch/{{jj.Video_Id}}/">
+				<img src="{{jj.Thumb.url}}" width="300px" height="200px">
+				</a>
+			
+		
+		<div class="my-2">
+			<span class="text-white">{{jj.Title}}</span>
+			{% endfor %}
+		</div> 
+		</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% endblock %}

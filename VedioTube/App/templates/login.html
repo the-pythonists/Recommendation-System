@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Login {% endblock %}
+
+{% block body %}
+
+<body>
+<div class="container d-flex justify-content-center">
+			<div class="col-md-4 mb-5">
+			<div class="my-3">
+			<!--<img src="{% static 'images/login.png' %}" id="img" alt="images"> -->
+			</div>
+                    <span class="anchor" id="formLogin"></span>
+                    <!-- form card login with validation feedback -->
+                    <div class="card card-outline-secondary">
+                        <div class="card-header">
+                            <h3 class="mb-0">Login</h3>
+                        </div>
+                        <div class="card-body" style="background-color:lightgrey; color:black;">
+                            <form class="form" role="form" autocomplete="off" id="loginForm" novalidate="" action="/login/" method="POST">{% csrf_token %}
+                                <div class="form-group">
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Enter Email-Id" required="">
+                                    <div class="invalid-feedback">Please enter your email</div>
+                                </div>
+                                <div class="form-group">
+								<i class="fa fa-unlock" aria-hidden="true"></i>
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" id="pwd1" name="password" placeholder="Enter password" required="" autocomplete="new-password">
+                                    <div class="invalid-feedback">Please enter a password</div>
+                                </div>
+                                <!--<div class="form-check small">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input"> <span>Remember me on this computer</span>
+                                    </label>
+                                </div> -->
+								<div id="register-link" class="text-left mt-2">
+								<i class="fa fa-key" aria-hidden="true"></i>
+                                <a href="/cpasswordpage/" class="text-info"><span style="color:black;">Change Password</span>{% csrf_token %}</a><br><br>
+
+                                <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                <a href="/registerpage/" class="text-info"><span style="color:black;">Create an Account</span>{% csrf_token %}</a>
+                            
+                                <button type="submit" class="btn btn-success btn-lg float-right mb-2" id="btnLogin">Login</button>
+                            </div></form>
+                        </div>
+                        <!--/card-body-->
+                    </div>
+                    <!-- /form card login -->
+
+                </div>
+			</div>
+</div>
+</body>
+{% endblock %}

@@ -1,0 +1,265 @@
+@import url("https://fonts.googleapis.com/css?family=Questrial");
+$fontFamily: "Questrial" , sans-serif;
+$black:#000000;
+$controlsColor:#acafb6;
+$white:#ffffff;
+
+@mixin transition{
+	transtion: all ease 0.2s;
+}
+
+body{
+	font-family:$fontFamily;
+	background-color: lighten($black,80%);
+}
+
+.container{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.videoPlayer{
+
+	width:800px;
+	height:500px;
+	border-radius:4px;
+	overflow:hidden;
+	display:flex;
+	align-items:center;
+	position:relative;
+	background-color:$black;
+	box-shadow:0px 10px 20px rgba($black,0.5);
+	&.showControls{
+	.videoTitle{
+	top:0;
+	}
+	.controls{
+	bottom:0;
+	}
+	}
+	
+}
+
+  .videoTitle{
+  	position:absolute;
+  	left:0;
+  	right:0;
+  	margin:auto;
+  	z-index:100;
+  	top:-50%;
+  	padding:0.5rem;
+  	justify-content:center;
+  	display:flex;
+  	background-color:rgba($black,0.6);
+  	color:rgba($white,0.8);
+  	text-transform:uppercase;
+  	@include transition();
+  }
+
+  video{
+  max-width:100%;
+  }
+
+  .videoPlayer .controls{
+  position:absolute;
+  bottom:-50%;
+  	left:0;
+  	right:0;
+  	margin:auto;
+  	display:flex;
+  	flex-direction:column;
+  	justify-content:center;
+  	z-index:100;
+  	background-color:rgba($black,0.6);
+  	color:$white;
+  	@include transition();
+  	.topControls{
+  	padding:1rem;
+  	position:relative;
+  	}
+  	.bottomControls{
+  	padding:0.5rem 2rem;
+  	display:flex;
+  	justify-content:space-between;
+  	position:relative;
+  	}
+  }
+
+  .topControls{
+  	display:flex;
+  	justify-content:space-between;
+  	align-items:center;
+  	.startTime .endTime{
+  	flex-basis:10%;
+  	flex-shrink:1;
+  	display:inline-flex;
+  	justify-content:center;
+  	color:$controlsColor;
+  	}
+  	.seekbar{
+  	height:6px;
+  	background-color:rgba($controlsColor,0.6);
+  	flex-basis:80%;
+  	border-radius:5px;
+  	display:flex;
+  	.progressBar{
+  	height:100%;
+  	width:50%;
+  	left:0;
+  	background-color:rgba($white,0.6);
+  	border-radius:5px;
+  	position:relative;
+  	display:inline-flex;
+  	&::after{
+  	content:"";
+  	position:relative;
+  	height:4px;
+  	width:4px;
+  	top:0;
+  	bottom:0;
+  	margin:auto;
+  	right:-4px;
+  	border-radius:500px;
+  	@include transition();
+  	}
+  	}
+  	&:hover{
+  	cursor:pointer;
+  	.progressBar{
+  	&::after{
+  	height:10px;
+  	width:10px;
+  	background-color:rgba($white,1);
+  	}
+  	}	
+  	}
+  	}
+  }
+
+  .bottomControls{
+  	.volumeCtrl{
+  	display:inline-flex;
+  	align-items:center;
+  	flex-basis:15%;
+  	justify-content:space-between;
+  	.icon{
+  	color:$controlsColor;
+  	margin-right:0.5rem;
+  	font-size:1.2rem;
+  	}
+  	.seekbarSection{
+  		display:inline-flex;
+  		flex-direction:column;
+  		flex-basis:80%;
+  		.wrapper{
+  		display:inline-flex;
+  		justify-content:space-between;
+  		.lbl,.percentage{
+  			font-size:0.8rem;
+  			color:$controlsColor;
+  			text-transform:capitalize;
+  		}
+  		}
+  		.seekbar{
+  		margin-top:inline-flex;
+  		height:5px;
+  		boder-radius:2px;
+  		flex-basis:100%;
+  		background-color:rgba($white,0.6);
+  		position:relative;
+  		.progressBar{
+  			height:100%;
+  			width:100%;
+  			background-color:rgba($white,0.6);
+  			border-radius:2px;
+  			&::after{
+  			content:"";
+  			position:absolute;
+		  	height:4px;
+		  	width:4px;
+		  	top:0;
+		  	bottom:0;
+		  	right:0px;
+		  	margin:auto;
+		  	background-color:rgba($white,0.1);
+		  	border-radius:500px;
+  	}
+  		}
+  		&:hover{
+  			cursor:pointer;
+  			.progressBar{
+  			&::after{
+  				height:10px;
+  				width:10px;
+  				background-color:rgba($white,1);
+  			}
+  			}
+  		}
+  		}
+  	}
+  	}
+  }
+
+  .bottomControls{
+  	.playbackCtrl{
+  		flex-basis:70%;
+  		display:inline-flex;
+  		justify-content:space-evenly;
+  		.btn{
+  			font-size:2rem;
+  			background-color:transparent;
+  			outline:0;
+  			border:none;
+  			color:$controlsColor;
+  			@include transition();
+  			&:hover{
+  				cursor:pointer;
+  				.fa{
+  					color:lighten($controlsColor,20%);
+  				}
+  			}
+  			&.play{
+  				.fa-pause{
+  					display:none;
+  				}
+  			}
+  			&.pause{
+  				transform:rotate(180deg);
+  				.fa-play{
+  					display:none;
+  				}
+  			}
+  			&.forward,&backward{
+  				font-size:1.5rem;
+  			}
+  		}
+  	}
+  }
+
+  .bottomControls{
+  	.fullscreenCtrl{
+  		flex-basis:15%;
+  		display:inline-flex;
+  		justify-content:flex-end;
+  		.fullscreen{
+  			font-size:1.2rem;
+  			border:none;
+  			background-color:transparent;
+  			color:$controlsColor;
+  			outline:0;
+  			&:hover{
+  				cursor:pointer;
+  				.fa{
+  					color: lighten($controlsColor,20%);
+  				}
+  			}
+  		}
+  	}
+  }

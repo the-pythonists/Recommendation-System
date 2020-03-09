@@ -1,0 +1,154 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Website Icon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/icon.ico' %}">
+    <title>{% block title %} {% endblock %}</title>
+  </head>
+  <body>
+
+<div class="form-inline my-4 mx-4 row bg-danger">
+  <div class="col-4">
+  <img src="{% static 'images/logo.jpeg' %}" width="100px">
+  </div>
+    <div class="col-4 words">
+    <form class="form-inline my-2 my-lg-0" action="/search" method="get">
+      <input class="form-control mr-sm-1 w-50" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+      <button type="button" class="rounded mr-1 pl-1" onclick="myfun()"><i class="fa fa-microphone text-dark " aria-hidden="true"></i></button>
+      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+    <div class="form-inline ml-5 mt-1">
+      <div class="ml-5">
+    {% if image %}
+  {% for i in image %}    
+    <span><i>{{i.Name}}</i></span>
+    <img class="rounded-circle" src="{{i.Image.url}}" width="50">
+  {% endfor %}
+{% else %}
+  <img class="rounded-circle" src="{% static 'images/profile.jpeg' %}" width="50">
+{% endif %}
+    
+</div>
+<div>
+    {% if flag %}
+      <a href="/logout/"><span class="fa fa-sign-out fa-2x text-dark ml-3"></span></a>
+    {% else %}
+      <a href="/uploadsave/"><span class="fa fa-sign-in fa-2x text-dark ml-3"></span></a>
+    {% endif %}
+    </div>
+    </div>
+
+</div>
+<div class="container">
+<img src="{% static 'images/download2.jpg' %}" class="img-responsive h-0" height="300" width="1100" alt="Responsive image">
+
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 container">
+  <img src="{% static 'images/download3.png' %}" width="60" height="50" class="d-inline-block align-top" alt="">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link ml-5" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item"> 
+        <div class="dropdown ml-5">
+          <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#" name="romance">Action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+</div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link  ml-5" href="/about">About</a>
+      </li>
+      <li>
+        <div class="dropdown ml-5">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu
+          </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Your Channel</a>
+    <a class="dropdown-item" href="#">Settings</a>
+    <a class="dropdown-item" href="/uploadsave/">Upload Vedio</a>
+  </div>
+</div>
+      </li>
+    </ul>
+    <div class="rounded mr-5 ml-5 bg-danger">
+    <a class="btn-floating btn-lg btn-ins text-white" type="button" role="button" target="_blank" href="https://www.instagram.com/theshubham31/?hl=en"><i class="fa fa-instagram"></i></a>
+    <a class="btn-floating btn-lg btn-fb text-white" type="button" target="_blank" role="button" href="https://www.facebook.com/buddy.sj"><i class="fa fa-facebook-f"></i></a>
+    <a class="btn-floating btn-lg btn-tw text-white" type="button" target="_blank" role="button" href="https://twitter.com/Ess_Jay2"><i class="fa fa-twitter"></i></a>
+    </div>
+    <a href="#"><i class="fa fa-bell fa-2x text-dark ml-5 mr-5" aria-hidden="true"></i></a>
+    <form method="post" action="/subscribe/">{% csrf_token %}
+      <button type="submit" class="btn btn-danger ml-5" name="subscibe">SUBSCRIBE</button>
+    </form>
+  </div>
+</nav>
+</div>
+
+{% for message in messages %}
+<div class="alert alert-{{message.tags}} alert-dismissible fade show d-flex justify-content-center" role="alert">
+  <strong class="mr-2">Message:</strong>{{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+
+    {% block body %} {% endblock %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+   {% block js %} 
+    <script type="text/javascript">
+      function myfun() {
+  var speech = true
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = new SpeechRecognition();
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  const words = document.querySelector('.words')
+   recognition.addEventListener('result',e => {
+    const transcript = Array.from(e.results)
+    .map(result => result[0])
+    .map(result => result.transcript)
+    .join('')
+
+    document.getElementById("search").value = transcript;
+    
+  });
+  if(speech == true){
+    recognition.start();
+    recognition.addEventListener('end',recognition.start);
+  }
+  else if(recognition != null){
+    recognition.stop();
+  }
+}
+    </script>
+    {% endblock %}
+  </body>
+</html>

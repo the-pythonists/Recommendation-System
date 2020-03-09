@@ -1,0 +1,5 @@
+BeautifulSoup4==4.8.2
+requests==2.23.0
+pytube==9.6.0
+tmdbsimple==2.2.0
+selenium==3.141.0

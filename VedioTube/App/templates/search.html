@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Search Results {% endblock %}
+
+{% block body %}
+
+<body>
+<div class="container mt-2">
+	<h2>Search results:</h2>
+	{% if allposts|length < 1 %}
+	<p>No search results</p>
+
+	Your search - <b>{{query}} </b>- did not match any documents.<br><br>
+	Suggestions:  
+	<ul>
+		<li>Make sure that all words are spelled correctly.</li>
+		<li>Try different keywords.</li>
+		<li>Try more general keywords.</li>
+		<li>Try fewer keywords</li>
+	</ul>
+	{% endif %}
+	<div class="container">
+		<div class="row">
+	    {% for post in allposts %}
+
+		  <div class="col-4">
+		    <video class="w-100" controls>
+		        <source src="{{post.Video.url}}" type="video/mp4"><br>
+		    </video>
+		  </div>
+    	{% endfor %}
+		</div>
+	</div>
+</div>
+</body>
+{% endblock %}
