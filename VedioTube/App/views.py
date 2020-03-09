@@ -55,8 +55,7 @@ def watch(request,vid):
 def about(request):
 	if request.session.has_key('is_logged'):
 		userPic = Users.objects.filter(UserId=request.session['is_logged'])
-		flag = True
-		params = {'flag':flag,'image':userPic}
+		params = {'image':userPic}
 	else:
 		params = {}
 	return render(request,'about.html',params)
@@ -115,6 +114,8 @@ def login(request):
 		else:
 			return render(request,'login.html')
 
+def registerpage(request):
+	return render(request,'register.html')
 
 def register(request):
 	if request.method=="POST":
@@ -140,21 +141,30 @@ def cpasswordpage(request):
 
 def cpasswordsave(request):
 	if request.method=="POST":
+		email = request.POST.get('email')
 		cpass = request.POST.get('cpass')
 		npass = request.POST.get('npass')
 		vpass = request.POST.get('vpass')
-		obj = Login.objects.filter(password=cpass)
+		obj = Users.objects.filter(Email=email)
 		if obj:
-			if npass != vpass:
-				messages.success(request,'New Password and Verify Password does not match')
-				return render(request,'changepassword.html')
+			for p in obj:
+				upass = p.Password
+			if check_password(cpass,upass) == True:
+				if npass != vpass:
+					messages.success(request,'New Password and Verify Password does not match')
+					return render(request,'changepassword.html')
+				else:
+					password = make_password(npass)
+					datasave = Users.objects.filter(Email=email).update(Password=password)
+					messages.success(request,'Change Password Successfully')
+					return render(request,'changepassword.html')
 			else:
-				messages.success(request,'Change Password Successfully')
+				messages.success(request,'Invalid Current Password')
 				return render(request,'changepassword.html')
 		else:
-			messages.success(request,'Invalid Current Password')
+			messages.success(request,'Invalid Email-ID')
 			return render(request,'changepassword.html')
-
+	
 def search(request):
 	flag = False
 	if request.session.has_key('is_logged'):

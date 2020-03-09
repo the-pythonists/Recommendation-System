@@ -26,6 +26,7 @@ urlpatterns = [
     path("about/",views.about,name="About"),
     path("upload/",views.upload,name="upload"),
     path("login/",views.login,name="login"),
+    path("registerpage/",views.registerpage,name="registerpage"),
     path("register/",views.register,name="register"),
     path("cpasswordpage/",views.cpasswordpage,name="cpasswordpage"),
     path("cpasswordsave/",views.cpasswordsave,name="cpasswordsave"),
