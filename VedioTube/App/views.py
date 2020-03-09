@@ -45,15 +45,24 @@ def watch(request,vid):
 	view_count = str(int(count)+1)
 	datasave = Videos_Data.objects.filter(Video_Id=vid).update(Views=view_count)
 	watch_video = Videos_Data.objects.filter(Video_Id=vid)
-	params = {"video":watch_video,'all_videos':lt,'image':userPic}
+	if request.session.has_key('is_logged'):
+		userPic = Users.objects.filter(UserId=request.session['is_logged'])
+		params = {"video":watch_video,'all_videos':lt,'image':userPic}
+	else:
+		params = {"video":watch_video,'all_videos':lt}
 	return render(request,'play.html',params)
 
 def about(request):
-	flag =False
 	if request.session.has_key('is_logged'):
 		userPic = Users.objects.filter(UserId=request.session['is_logged'])
+<<<<<<< HEAD
 		flag = True
 	params = {'flag':flag,'image':userPic}
+=======
+		params = {'image':userPic}
+	else:
+		params = {}
+>>>>>>> origin/master
 	return render(request,'about.html',params)
 
 # def uploadfile(request):
@@ -238,7 +247,37 @@ def subscribe(request):
 
 
 #--------------Categories----------------
+def action(request):
+	all_videos = Videos_Data.objects.filter(Category__icontains="Action")
+	params = {'videos':all_videos}
+	return render(request,'categorywise.html',params)
+
 def romance(request):
 	all_videos = Videos_Data.objects.filter(Category__icontains="Romance")
+	params = {'videos':all_videos}
+	return render(request,'categorywise.html',params)
+
+def comedy(request):
+	all_videos = Videos_Data.objects.filter(Category__icontains="Comedy")
+	params = {'videos':all_videos}
+	return render(request,'categorywise.html',params)
+
+def drama(request):
+	all_videos = Videos_Data.objects.filter(Category__icontains="Drama")
+	params = {'videos':all_videos}
+	return render(request,'categorywise.html',params)
+
+def thriller(request):
+	all_videos = Videos_Data.objects.filter(Category__icontains="Thriller")
+	params = {'videos':all_videos}
+	return render(request,'categorywise.html',params)
+
+def horror(request):
+	all_videos = Videos_Data.objects.filter(Category__icontains="Horror")
+	params = {'videos':all_videos}
+	return render(request,'categorywise.html',params)
+
+def crime(request):
+	all_videos = Videos_Data.objects.filter(Category__icontains="Crime")
 	params = {'videos':all_videos}
 	return render(request,'categorywise.html',params)

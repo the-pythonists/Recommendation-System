@@ -39,7 +39,13 @@ urlpatterns = [
     path('post_comments/<str:vid>',views.post_comments,name="post_comments"),
     # path("csv_file/",views.csv_file,name="csv_file"),
     path("subscribe/",views.subscribe,name="subscribe"),
+    path("action/",views.action,name="action"),
     path("romance/",views.romance,name="romance"),
+    path("comedy/",views.comedy,name="comedy"),
+    path("drama/",views.drama,name="drama"),
+    path("thriller/",views.thriller,name="thriller"),
+    path("horror/",views.horror,name="horror"),
+    path("crime/",views.crime,name="crime"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
