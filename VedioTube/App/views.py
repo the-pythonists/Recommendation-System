@@ -55,16 +55,15 @@ def watch(request,vid):
 def about(request):
 	if request.session.has_key('is_logged'):
 		userPic = Users.objects.filter(UserId=request.session['is_logged'])
-		params = {'image':userPic}
+		flag = True
+		params = {'flag':flag,'image':userPic}
 	else:
 		params = {}
 	return render(request,'about.html',params)
 
-def uploadfile(request):
-	return render(request,'uploadfile.html')
 
-#Uploading Vedios Using login.html
-def uploadsave(request):
+#Uploading Video Using login.html
+def upload(request):
 	if request.method=="POST":
 		thumbnail = request.FILES['tnail']
 		video = request.FILES['video']
@@ -93,8 +92,6 @@ def uploadsave(request):
 		else:
 			return render(request,'login.html')
 
-def loginfile(request):
-	return render(request,'login.html')
 
 def login(request):
 	if request.method=="POST":
@@ -109,15 +106,15 @@ def login(request):
 		if check_password(pswd,userpass) == True:
 			request.session['is_logged'] = userId
 			request.session['name'] = holdername
-			return HttpResponseRedirect('/uploadsave')
+			return HttpResponseRedirect('/')
+		else:
+			return HttpResponse("Invalid Password")
 	else:
 		if request.session.has_key('is_logged'):
 			return HttpResponseRedirect('/')
 		else:
 			return render(request,'login.html')
 
-def registerpage(request):
-	return render(request,'register.html')
 
 def register(request):
 	if request.method=="POST":
@@ -212,12 +209,6 @@ def post_comments(request,vid):
 	params = {"video":post}
 	return render(request, 'play.html', params)
  
-def csv_file(request):
-	from django_pandas.io import read_frame
-	query = Videos_Data.objects.all()
-	df = read_frame(query)
-	df.to_csv("Data.csv",index = False)
-	return HttpResponse('<h1>Create successfully')
 
 def subscribe(request):
 	if request.method=="POST":
