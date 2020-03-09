@@ -35,6 +35,7 @@
     <img class="rounded-circle" src="{{i.Image.url}}" width="50">
   {% endfor %}
 {% else %}
+  <span><i>User</i></span>
   <img class="rounded-circle" src="{% static 'images/profile.jpeg' %}" width="50">
 {% endif %}
     
@@ -69,11 +70,19 @@
             Categories
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#" name="romance">Action</a>
+            <a class="dropdown-item" href="/action">Action</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="/romance">Romance</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="/comedy">Comedy</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/drama">Drama</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/thriller">Thriller</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/horror">Horror</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/crime">Crime</a>
         </div>
 </div>
       </li>
