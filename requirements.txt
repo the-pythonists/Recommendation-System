@@ -6,3 +6,5 @@ selenium==3.141.0
 pandas==1.0.1
 numpy==1.18.1
 scikit-learn
+django-pandas==0.6.1
+Django==3.0.4
