@@ -25,6 +25,8 @@ And finally, video upload is done using ***'video_uploader.py'*** which is actua
 In the above picture, when we clicked on Half Girlfriend movie, the top two recommendations are of Manmarziyaan and Luka Chupi, which 
 pretty much are related to each other(based on content).
 
+You can even use voice input to search for the videos.
+
 # Sources and Documentation:-
 
 https://www.crummy.com/software/BeautifulSoup/bs4/doc/
