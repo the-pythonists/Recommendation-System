@@ -1,36 +1,22 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
+'''
+Main Script used for Recommendation System
+'''
 
 
 import pandas as pd
 import numpy as np
+
+# importing our Videos Table from models 
+# and then creating dataframe 
 from App.models import Videos_Data
 from django_pandas.io import read_frame
-# In[4]:
 
 
 query = Videos_Data.objects.all()
 df = read_frame(query)
 
-# df = pd.read_csv('C:\\repos\\Recommendation-System\\VideoPlayer\\App\\VideoData.csv')
-
-
-# In[6]:
-
-
-# df.head()
-
-
-# In[7]:
-
 
 df['Description'].head()
-
-
-# In[10]:
-
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -42,19 +28,7 @@ tfv = TfidfVectorizer(min_df=3,  max_features=None,
 df['Description'] = df['Description'].fillna('')
 
 
-# In[11]:
-
-
 tfv_matrix = tfv.fit_transform(df['Description'])
-
-
-# In[12]:
-
-
-tfv_matrix.shape
-
-
-# In[13]:
 
 
 from sklearn.metrics.pairwise import sigmoid_kernel
@@ -62,19 +36,10 @@ from sklearn.metrics.pairwise import sigmoid_kernel
 sig = sigmoid_kernel(tfv_matrix,tfv_matrix)
 
 
-# In[14]:
-
-
 indices = pd.Series(df.index,index = df['Title']).drop_duplicates()
 
 
-# In[15]:
-
-
 indices.head()
-
-
-# In[18]:
 
 
 def recommender(title, sig=sig):
@@ -89,16 +54,3 @@ def recommender(title, sig=sig):
     movie_indices = [i[0] for i in sig_scores]
     
     return df['Title'].iloc[movie_indices]
-
-
-# In[19]:
-
-
-# recommender('AndhaDhun - Official Trailer  Tabu  Ayushmann Khurrana  Radhika Apte  5th October')
-
-
-# In[ ]:
-
-
-
-
