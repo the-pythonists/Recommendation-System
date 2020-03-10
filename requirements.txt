@@ -3,3 +3,6 @@ requests==2.23.0
 pytube==9.6.0
 tmdbsimple==2.2.0
 selenium==3.141.0
+pandas==1.0.1
+numpy==1.18.1
+scikit-learn
