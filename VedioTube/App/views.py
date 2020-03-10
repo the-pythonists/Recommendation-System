@@ -167,8 +167,7 @@ def cpasswordsave(request):
 	
 def search(request):
 	flag = False
-	if request.session.has_key('is_logged'):
-		flag = True
+	
 	query = request.GET['search']
 	if len(query)>20:
 		allposts = Videos_Data.objects.none()
@@ -179,7 +178,12 @@ def search(request):
 		allposts = allPostTitle.union(allPostCategory,allPostChannel_Name)
 	if allposts.count() == 0:
 		messages.warning(request,'No search results found. Please refine your query')
-	params = {'allposts':allposts,'query':query,'flag':flag}
+	if request.session.has_key('is_logged'):
+		flag = True
+		userPic = Users.objects.filter(UserId=request.session['is_logged'])
+		params = {'allposts':allposts,'query':query,'flag':flag,'image':userPic}
+	else:
+		params = {'allposts':allposts,'query':query,'flag':flag}
 	return render(request,'search.html',params)
 
 def logout(request):
@@ -241,37 +245,14 @@ def subscribe(request):
 
 
 #--------------Categories----------------
-def action(request):
-	all_videos = Videos_Data.objects.filter(Category__icontains="Action")
-	params = {'videos':all_videos}
-	return render(request,'categorywise.html',params)
 
-def romance(request):
-	all_videos = Videos_Data.objects.filter(Category__icontains="Romance")
-	params = {'videos':all_videos}
-	return render(request,'categorywise.html',params)
-
-def comedy(request):
-	all_videos = Videos_Data.objects.filter(Category__icontains="Comedy")
-	params = {'videos':all_videos}
-	return render(request,'categorywise.html',params)
-
-def drama(request):
-	all_videos = Videos_Data.objects.filter(Category__icontains="Drama")
-	params = {'videos':all_videos}
-	return render(request,'categorywise.html',params)
-
-def thriller(request):
-	all_videos = Videos_Data.objects.filter(Category__icontains="Thriller")
-	params = {'videos':all_videos}
-	return render(request,'categorywise.html',params)
-
-def horror(request):
-	all_videos = Videos_Data.objects.filter(Category__icontains="Horror")
-	params = {'videos':all_videos}
-	return render(request,'categorywise.html',params)
-
-def crime(request):
-	all_videos = Videos_Data.objects.filter(Category__icontains="Crime")
-	params = {'videos':all_videos}
+def category(request):
+	if request.method == "POST":
+		cat = request.POST.get('cat')
+	all_videos = Videos_Data.objects.filter(Category__icontains=cat)
+	if request.session.has_key('is_logged'):
+		userPic = Users.objects.filter(UserId=request.session['is_logged'])
+		params = {'videos':all_videos,'category':cat,'image':userPic}
+	else:
+		params = {'videos':all_videos,'category':cat}
 	return render(request,'categorywise.html',params)

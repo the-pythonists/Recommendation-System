@@ -74,19 +74,28 @@
             Categories
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="/action">Action</a>
+            <!-- <a class="dropdown-item" href="/action">Action</a> -->
+            <form method="POST" action="/category/">{% csrf_token %}
+            <input type="submit" name="cat" class="dropdown-item" value="Action">
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/romance">Romance</a>
+            <!-- <a class="dropdown-item" href="/romance">Romance</a> -->
+            <input type="submit" name="cat" class="dropdown-item" value="Romance">
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/comedy">Comedy</a>
+            <!-- <a class="dropdown-item" href="/comedy">Comedy</a> -->
+            <input type="submit" name="cat" class="dropdown-item" value="Comedy">
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/drama">Drama</a>
+            <!-- <a class="dropdown-item" href="/drama">Drama</a> -->
+            <input type="submit" name="cat" class="dropdown-item" value="Drama">
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/thriller">Thriller</a>
+            <!-- <a class="dropdown-item" href="/thriller">Thriller</a> -->
+            <input type="submit" name="cat" class="dropdown-item" value="Thriller">
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/horror">Horror</a>
+            <!-- <a class="dropdown-item" href="/horror">Horror</a> -->
+            <input type="submit" name="cat" class="dropdown-item" value="Horror">
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/crime">Crime</a>
+            <!-- <a class="dropdown-item" href="/crime">Crime</a> -->
+            <input type="submit" name="cat" class="dropdown-item" value="Crime">
+          </form>
         </div>
 </div>
       </li>

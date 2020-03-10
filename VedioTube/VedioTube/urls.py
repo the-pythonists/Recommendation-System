@@ -36,13 +36,7 @@ urlpatterns = [
     path('post_dislikes/<str:vid>',views.post_dislikes,name="post_dislikes"),
     path('post_comments/<str:vid>',views.post_comments,name="post_comments"),
     path("subscribe/",views.subscribe,name="subscribe"),
-    path("action/",views.action,name="action"),
-    path("romance/",views.romance,name="romance"),
-    path("comedy/",views.comedy,name="comedy"),
-    path("drama/",views.drama,name="drama"),
-    path("thriller/",views.thriller,name="thriller"),
-    path("horror/",views.horror,name="horror"),
-    path("crime/",views.crime,name="crime"),
+    path("category/",views.category,name="category"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
