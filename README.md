@@ -17,6 +17,16 @@ Then to provide thumbnails to the videos, I downloaded the movie posters using *
 
 And finally, video upload is done using ***'video_uploader.py'*** which is actually web automation technique to automatically upload the Data.
 
+# Screenshots
+![Home Page](https://github.com/the-pythonists/Recommendation-System/blob/master/ScreenShots/Home%20Page%20One.png)
+
+![Video Play Page](https://github.com/the-pythonists/Recommendation-System/blob/master/ScreenShots/Video%20Play%20Page.png)
+
+In the above picture, when we clicked on Half Girlfriend movie, the top two recommendations are of Manmarziyaan and Luka Chupi, which 
+pretty much are related to each other(based on content).
+
+You can even use voice input to search for the videos.
+
 # Sources and Documentation:-
 
 https://www.crummy.com/software/BeautifulSoup/bs4/doc/
