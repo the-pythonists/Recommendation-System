@@ -4,7 +4,7 @@ pytube==9.6.0
 tmdbsimple==2.2.0
 selenium==3.141.0
 pandas==1.0.1
-numpy==1.18.1
+numpy==1.22.0
 scikit-learn
 django-pandas==0.6.1
 Django==3.0.4
